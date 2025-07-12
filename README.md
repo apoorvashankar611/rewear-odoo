@@ -6,8 +6,6 @@
 
 ReWear is a web-based platform developed to encourage sustainable fashion by allowing users to exchange unused clothing. The system supports both direct swaps between users and a point-based redemption model. The aim is to minimize textile waste by motivating individuals to reuse wearable garments rather than discarding them.
 
----
-
 ## Features
 
 ### User Authentication
@@ -38,8 +36,6 @@ ReWear is a web-based platform developed to encourage sustainable fashion by all
 - Moderate and approve/reject item listings  
 - Remove inappropriate or spam items  
 - Lightweight admin panel for platform oversight  
-
----
 
 ---
 
