@@ -42,7 +42,7 @@ def add_item_view(request):
             item = form.save(commit=False)
             item.owner = request.user
             item.save()
-            return redirect('core:dashboard') # Redirect to dashboard to see their new item
+            return redirect('core:dashboard')
     else:
         form = ClothingItemForm()
     context = {'form': form}
