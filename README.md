@@ -41,10 +41,6 @@ ReWear is a web-based platform developed to encourage sustainable fashion by all
 
 ---
 
-### Mockup Link
-
-[Excalidraw UI Mockup](https://app.excalidraw.com/l/65VNwvy7c4X/zEqG7IJrg0)
-
 ---
 
 ## Team Members
