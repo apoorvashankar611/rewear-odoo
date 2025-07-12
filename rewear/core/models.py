@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 # --- Model 1: The Custom User ---
-# We extend Django's built-in User to add our points system.
+# We extend Django's built-in User to add our points system here.
 class User(AbstractUser):
     points = models.IntegerField(default=50) # Users start with 50 points
 
