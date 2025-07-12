@@ -1,0 +1,67 @@
+<!-- core/templates/core/dashboard.html -->
+{% extends 'core/base.html' %}
+
+{% block title %}Your Dashboard - ReWear{% endblock %}
+
+{% block content %}
+<h2>Your Dashboard</h2>
+<hr>
+
+<!-- INCOMING SWAP REQUESTS -->
+<h4>Incoming Swap Requests</h4>
+<p>These are requests from other users for your items.</p>
+{% for req in incoming_requests %}
+    <div class="alert alert-info d-flex justify-content-between align-items-center">
+        <div>
+            <strong>{{ req.requester.username }}</strong> wants to swap for your <strong>"{{ req.item_requested.title }}"</strong>.
+        </div>
+        <div>
+            <a href="{% url 'core:accept_swap' req.pk %}" class="btn btn-sm btn-success">Accept</a>
+            <a href="{% url 'core:decline_swap' req.pk %}" class="btn btn-sm btn-danger">Decline</a>
+        </div>
+    </div>
+{% empty %}
+    <p class="text-muted">No one has requested your items yet.</p>
+{% endfor %}
+<hr>
+
+<!-- YOUR LISTED ITEMS -->
+<h4>Your Listed Items</h4>
+<ul class="list-group mb-4">
+    {% for item in my_items %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ item.title }}
+            <span class="badge 
+                {% if item.status == 'available' and item.is_approved %} bg-success 
+                {% elif item.status == 'available' and not item.is_approved %} bg-warning text-dark
+                {% else %} bg-secondary {% endif %}">
+                {% if item.status == 'available' and item.is_approved %} Available 
+                {% elif item.status == 'available' and not item.is_approved %} Pending Approval
+                {% else %} Swapped {% endif %}
+            </span>
+        </li>
+    {% empty %}
+        <li class="list-group-item">You haven't listed any items yet.</li>
+    {% endfor %}
+</ul>
+<hr>
+
+<!-- OUTGOING SWAP REQUESTS -->
+<h4>Your Outgoing Swap Requests</h4>
+<p>These are items you have requested from other users.</p>
+<ul class="list-group">
+{% for req in outgoing_requests %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Your request for <strong>"{{ req.item_requested.title }}"</strong>
+        <span class="badge 
+            {% if req.status == 'pending' %} bg-info text-dark
+            {% elif req.status == 'accepted' %} bg-success
+            {% else %} bg-danger {% endif %}">
+            {{ req.status|title }}
+        </span>
+    </li>
+{% empty %}
+    <li class="list-group-item">You haven't requested any swaps yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,37 @@
+<!-- core/templates/core/checkout.html -->
+{% extends 'core/base.html' %}
+{% block title %}Checkout - ReWear{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2>Checkout</h2>
+        <p class="lead">You are buying "{{ item.title }}" for <strong>${{ item.price }}</strong>.</p>
+        <hr>
+
+        <div class="alert alert-warning">
+            <strong>This is a demonstration.</strong> Do not enter real credit card information.
+        </div>
+
+        <form action="{% url 'core:purchase_success' %}">
+            <div class="mb-3">
+                <label class="form-label">Card Number</label>
+                <input type="text" class="form-control" placeholder="**** **** **** 1234">
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Expiry Date</label>
+                    <input type="text" class="form-control" placeholder="MM/YY">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">CVC</label>
+                    <input type="text" class="form-control" placeholder="123">
+                </div>
+            </div>
+            <!-- In a real app, clicking this button would trigger a payment API call.
+                 Here, it just redirects to the success page. -->
+            <button type="submit" class="btn btn-success w-100 btn-lg">Complete Purchase</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,157 @@
+<!-- core/templates/core/item_detail.html -->
+{% extends 'core/base.html' %}
+
+{% block title %}{{ item.title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Image Column -->
+    <div class="col-md-7">
+        {% if item.image %}
+            <img src="{{ item.image.url }}" class="img-fluid rounded shadow-sm" alt="{{ item.title }}">
+        {% else %}
+            <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 400px;">
+                <p class="text-muted">No image available</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Details Column -->
+    <div class="col-md-5">
+        <h1>{{ item.title }}</h1>
+        <p class="lead text-muted">by {{ item.owner.username }}</p>
+
+        <!-- Dynamically show price OR points -->
+        {% if item.price and item.price > 0 %}
+            <span class="badge bg-success rounded-pill fs-6 mb-3">${{ item.price }}</span>
+        {% else %}
+            <span class="badge bg-primary rounded-pill fs-6 mb-3">{{ item.points_value }} Points</span>
+        {% endif %}
+        
+        <div class="d-grid gap-2 mb-4">
+            <!-- Button to trigger Virtual Try-On Modal -->
+            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#tryOnModal">
+                👗 Virtual Try-On
+            </button>
+
+            <!-- Button to trigger Secure Chat Modal -->
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#chatModal">
+                💬 Securely Discuss Swap
+            </button>
+        </div>
+
+        <h4>Details</h4>
+        <p>{{ item.description }}</p>
+        <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item"><strong>Category:</strong> {{ item.category }}</li>
+            <li class="list-group-item"><strong>Size:</strong> {{ item.size }}</li>
+            <li class="list-group-item"><strong>Condition:</strong> {{ item.condition }}</li>
+        </ul>
+        
+        <!-- ============================================= -->
+        <!-- == START: NEW DYNAMIC ACTION BUTTON        == -->
+        <!-- ============================================= -->
+        <div class="d-grid">
+        {% if user.is_authenticated %}
+            {% if user == item.owner %}
+                <p class="text-center text-muted">This is your item.</p>
+            {% else %}
+                <!-- If item has a price, show Buy Now button -->
+                {% if item.price and item.price > 0 %}
+                    <a href="{% url 'core:checkout' item.pk %}" class="btn btn-lg btn-primary">
+                        Buy Now for ${{ item.price }}
+                    </a>
+                <!-- Otherwise, show the Swap button -->
+                {% else %}
+                    <a href="{% url 'core:request_swap' item.pk %}" class="btn btn-lg btn-success">
+                        Request a Swap ({{ item.points_value }} Points)
+                    </a>
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <!-- If user is not logged in -->
+            <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-lg btn-primary w-100">Login to Continue</a>
+        {% endif %}
+        </div>
+        <!-- ============================================= -->
+        <!-- == END: NEW DYNAMIC ACTION BUTTON          == -->
+        <!-- ============================================= -->
+
+    </div>
+</div>
+
+<!-- ============================================= -->
+<!-- == START: MODAL DEFINITIONS (UPDATED)      == -->
+<!-- ============================================= -->
+
+<!-- Virtual Try-On Modal -->
+<div class="modal fade" id="tryOnModal" tabindex="-1" aria-labelledby="tryOnModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tryOnModalLabel">AI Virtual Try-On</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted">Our AI can provide an estimate of fit and style.</p>
+                <div class="text-center p-4 border rounded bg-light" style="position: relative;">
+                    <!-- NEW, BETTER IMAGE of a person on a plain background -->
+                    <img src="https://images.pexels.com/photos/936043/pexels-photo-936043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="img-fluid rounded" alt="User's photo placeholder">
+
+                    <!-- UPDATED overlay style for better blending -->
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="Item overlay" style="position: absolute; top: 15%; left: 25%; width: 50%; opacity: 0.85; mix-blend-mode: multiply;">
+                    {% endif %}
+                    
+                    <p class="mt-3"><strong>This is a simulation.</strong> For best results, use items with a transparent background.</p>
+                </div>
+                <div class="mt-3">
+                    <label for="formFile" class="form-label">Upload your photo here:</label>
+                    <input class="form-control" type="file" id="formFile" disabled>
+                    <small class="form-text text-muted">File upload is disabled for this demo.</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Secure Chat Modal (No changes needed here) -->
+<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="chatModalLabel">Secure Mediated Chat</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted small">You are chatting about "{{ item.title }}". Your personal details are hidden from {{ item.owner.username }}.</p>
+                <div id="chat-window" class="border rounded p-3 bg-light" style="height: 300px; overflow-y: scroll;">
+                    <div class="mb-2">
+                        <small class="fw-bold text-primary">ReWear AI Mediator:</small>
+                        <div class="p-2 rounded bg-white">I've connected you both securely to discuss this item.</div>
+                    </div>
+                    <div class="mb-2 text-end">
+                        <small class="fw-bold">You:</small>
+                        <div class="p-2 rounded bg-success bg-opacity-25 d-inline-block">Hi! Does this item have any visible flaws not mentioned in the description?</div>
+                    </div>
+                    <div class="mb-2">
+                        <small class="fw-bold text-primary">ReWear AI Mediator:</small>
+                        <div class="p-2 rounded bg-white">Message sent. The other user has been notified.</div>
+                    </div>
+                </div>
+                <div class="mt-3 d-flex">
+                    <input type="text" id="chat-message-input" class="form-control" placeholder="Type your message..." disabled>
+                    <button class="btn btn-primary ms-2" disabled>Send</button>
+                </div>
+                <small class="form-text text-muted">Live chat is disabled for this demo.</small>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close Chat</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

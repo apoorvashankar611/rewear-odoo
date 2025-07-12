@@ -1,0 +1,14 @@
+<!-- core/templates/core/purchase_success.html -->
+{% extends 'core/base.html' %}
+{% block title %}Purchase Successful - ReWear{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4 text-success">✅ Success!</h1>
+    <p class="lead">Your purchase has been confirmed.</p>
+    <p>The item is now yours. You can view it in your dashboard.</p>
+    <hr>
+    <a href="{% url 'core:home' %}" class="btn btn-primary">Continue Browsing</a>
+    <a href="{% url 'core:dashboard' %}" class="btn btn-secondary">Go to Dashboard</a>
+</div>
+{% endblock %}

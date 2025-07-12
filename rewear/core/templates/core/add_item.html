@@ -1,0 +1,55 @@
+<!-- core/templates/core/add_item.html -->
+
+{% extends 'core/base.html' %}
+
+{% block title %}List a New Item - ReWear{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h2>List Your Clothing Item</h2>
+        <p>Fill out the details below to add your item to the exchange.</p>
+        <hr>
+
+        <!-- IMPORTANT: enctype is required for file uploads -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} <!-- Django security token -->
+            
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                {{ form.title }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                {{ form.description }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                {{ form.image }}
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Category</label>
+                    {{ form.category }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Size</label>
+                    {{ form.size }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Condition</label>
+                    {{ form.condition }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Points Value</label>
+                    {{ form.points_value }}
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">List My Item</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

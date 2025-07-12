@@ -1,0 +1,38 @@
+<!-- core/templates/core/home.html -->
+
+{% extends 'core/base.html' %}
+
+{% block title %}Browse Items - ReWear{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1>Welcome to ReWear</h1>
+    <p class="lead">Swap your style, not the planet. Browse items from our community.</p>
+</div>
+
+<div class="row">
+    {% for item in items %}
+    <div class="col-md-4 mb-4">
+        <a href="{% url 'core:item_detail' item.pk %}" class="text-decoration-none text-dark">
+            <div class="card h-100">
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.title }}" style="height: 300px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">Condition: {{ item.condition }}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <small class="text-muted">Listed by: {{ item.owner.username }}</small>
+                    <span class="badge bg-primary rounded-pill">{{ item.points_value }} Points</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% empty %}
+        <div class="col">
+            <p class="text-center">No items have been listed yet. Be the first!</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
