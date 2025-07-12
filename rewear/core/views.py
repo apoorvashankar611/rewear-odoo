@@ -8,8 +8,6 @@ from django.db.models import Q # For complex queries
 from .models import ClothingItem, SwapRequest
 from .forms import ClothingItemForm, CustomUserCreationForm
 
-# --- Main Page Views ---
-
 def home_view(request):
     items = ClothingItem.objects.filter(is_approved=True, status='available')
     context = {'items': items}
