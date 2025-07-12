@@ -1,7 +1,7 @@
 # core/urls.py
 
 from django.urls import path
-# We don't need to import auth_views here anymore
+
 from . import views
 
 app_name = 'core'
