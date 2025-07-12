@@ -114,8 +114,7 @@ def decline_swap_view(request, swap_pk):
         swap.status = 'rejected'
         swap.save()
     return redirect('core:dashboard')
-
-
+    
 # core/views.py
 # (Add these two new functions to the file. You can put them at the end.)
 
