@@ -24,5 +24,5 @@ urlpatterns = [
     path('checkout/<int:item_pk>/', views.checkout_view, name='checkout'),
     path('purchase_success/', views.purchase_success_view, name='purchase_success'),
     
-    # The login and logout paths have been REMOVED from this file.
+    # The login and logout paths have been REMOVED from this file
 ]
