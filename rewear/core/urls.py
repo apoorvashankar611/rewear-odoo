@@ -14,7 +14,6 @@ urlpatterns = [
     
     # --- The signup URL belongs here because it uses our custom view ---
     path('signup/', views.signup_view, name='signup'),
-    
     # --- Dashboard & Swapping ---
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('request_swap/<int:item_pk>/', views.request_swap_view, name='request_swap'),
