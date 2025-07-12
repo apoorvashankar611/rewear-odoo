@@ -1,45 +1,53 @@
 # ReWear – Community Clothing Exchange
 
-## Problem Statement 3
+## Problem Statement 3 – Hackathon Submission
 
 ### Overview
 
-ReWear is a web-based platform developed to encourage sustainable fashion by allowing users to exchange unused clothing. The system supports both direct swaps between users and a point-based redemption model. The aim is to minimize textile waste by motivating individuals to reuse wearable garments rather than discarding them. 
-
-## Features
-
-### User Authentication
-- Email/password signup and login
-
-### Landing Page
-- Platform introduction  
-- Calls-to-action: “Start Swapping”, “Browse Items”, “List an Item”  
-- Featured items carousel  
-
-### User Dashboard
-- Profile details and points balance  
-- Uploaded items overview  
-- Ongoing and completed swaps list  
-
-### Item Detail Page
-- Image gallery and full item description  
-- Uploader information  
-- Options: “Swap Request” or “Redeem via Points”  
-- Item availability status  
-
-### Add New Item Page
-- Upload images  
-- Enter title, description, category, type, size, condition, and tags  
-- Submit to list item  
-
-### Admin Role
-- Moderate and approve/reject item listings  
-- Remove inappropriate or spam items  
-- Lightweight admin panel for platform oversight  
+ReWear is a web-based platform developed as a solution to promote sustainable fashion by facilitating the exchange of unused clothing. Users can either swap items directly with others or use a point-based redemption system. The platform aims to reduce textile waste and promote the reuse of wearable garments in a community-driven environment.
 
 ---
 
-## Team Members
+## Key Features
+
+### 1. User Authentication
+- Secure email/password-based signup and login system
+
+### 2. Landing Page
+- Introduction to the platform and its purpose
+- Clear calls-to-action: “Start Swapping”, “Browse Items”, “List an Item”
+- Carousel showcasing featured or trending items
+
+### 3. User Dashboard
+- Displays user profile details and points balance
+- Overview of uploaded items
+- List of ongoing and completed swaps
+
+### 4. Item Detail Page
+- Image gallery and comprehensive item description
+- Uploader profile and contact information
+- Swap or redeem options based on item status
+- Item availability indicator
+
+### 5. Add New Item Page
+- Image upload functionality
+- Input fields for title, description, category, type, size, condition, and tags
+- Submission option to list an item
+
+### 6. Admin Role
+- Approve or reject item listings based on guidelines
+- Remove inappropriate or flagged items
+- Access a lightweight admin panel for platform oversight
+
+---
+
+### Mockup Link
+
+[Click here to view the UI Mockup](https://app.excalidraw.com/l/65VNwvy7c4X/zEqG7IJrg0)
+
+---
+
+## Team Details
 
 **Team Leader**  
 - Name: Vishlavath Apoorva  
@@ -62,6 +70,7 @@ ReWear is a web-based platform developed to encourage sustainable fashion by all
 
 ---
 
-## License
+## Note
 
-This project is developed for academic and demonstration purposes only.
+This project has been developed as part of a hackathon submission and is intended for demonstration and evaluation purposes only.
+
