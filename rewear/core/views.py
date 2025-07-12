@@ -78,7 +78,7 @@ def request_swap_view(request, item_pk):
     SwapRequest.objects.get_or_create(
         requester=request.user,
         item_requested=item_to_request,
-        defaults={'status': 'pending'} # Only create if it doesn't exist
+        defaults={'status': 'pending'} 
     )
     return redirect('core:dashboard')
 
