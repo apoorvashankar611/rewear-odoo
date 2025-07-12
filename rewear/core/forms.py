@@ -11,7 +11,7 @@ class ClothingItemForm(forms.ModelForm):
         # List the fields from the model that you want in the form
         fields = ['title', 'description', 'image', 'category', 'size', 'condition', 'points_value','price']
         
-        # Optional: Add Bootstrap classes to the form fields for styling
+
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
